@@ -16,7 +16,7 @@ function version_lt() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)"
 function version_ge() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" == "$1"; }
 
 
-version=8.2.11
+version=8.2.14
 PHP_VER=82
 Install_php()
 {
@@ -36,34 +36,8 @@ fi
 
 if [ ! -d $sourcePath/php/php${PHP_VER} ];then
 
-	# ----------------------------------------------------------------------- #
-	# 中国优化安装
-	cn=$(curl -fsSL -m 10 -s http://ipinfo.io/json | grep "\"country\": \"CN\"")
-	LOCAL_ADDR=common
-	if [ ! -z "$cn" ] || [ "$?" == "0" ] ;then
-		LOCAL_ADDR=cn
-	fi
-
-	if [ "$LOCAL_ADDR" == "cn" ];then
-		if [ ! -f $sourcePath/php/php-${version}.tar.xz ];then
-			wget --no-check-certificate -O $sourcePath/php/php-${version}.tar.xz https://mirrors.sohu.com/php/php-${version}.tar.xz
-		fi
-	fi
-	# ----------------------------------------------------------------------- #
-
-
 	if [ ! -f $sourcePath/php/php-${version}.tar.xz ];then
 		wget --no-check-certificate -O $sourcePath/php/php-${version}.tar.xz https://www.php.net/distributions/php-${version}.tar.xz
-	fi
-
-	#检测文件是否损坏.
-	md5_file_ok=29af82e4f7509831490552918aad502697453f0869a579ee1b80b08f9112c5b8
-	if [ -f $sourcePath/php/php-${version}.tar.xz ];then
-		md5_file=`sha256sum $sourcePath/php/php-${version}.tar.xz  | awk '{print $1}'`
-		if [ "${md5_file}" != "${md5_file_ok}" ]; then
-			echo "PHP${version} 下载文件不完整,重新安装"
-			rm -rf $sourcePath/php/php-${version}.tar.xz
-		fi
 	fi
 	
 	cd $sourcePath/php && tar -Jxf $sourcePath/php/php-${version}.tar.xz

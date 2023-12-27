@@ -12,7 +12,7 @@ SYS_ARCH=`arch`
 install_tmp=${rootPath}/tmp/mw_install.pl
 
 
-version=7.2.31
+version=7.2.34
 PHP_VER=72
 Install_php()
 {
@@ -26,33 +26,8 @@ cd ${rootPath}/plugins/php/lib && /bin/bash zlib.sh
 
 if [ ! -d $sourcePath/php/php${PHP_VER} ];then
 
-	# ----------------------------------------------------------------------- #
-	# 中国优化安装
-	cn=$(curl -fsSL -m 10 -s http://ipinfo.io/json | grep "\"country\": \"CN\"")
-	LOCAL_ADDR=common
-	if [ ! -z "$cn" ] || [ "$?" == "0" ] ;then
-		LOCAL_ADDR=cn
-	fi
-
-	if [ "$LOCAL_ADDR" == "cn" ];then
-		if [ ! -f $sourcePath/php/php-${version}.tar.xz ];then
-			wget --no-check-certificate -O $sourcePath/php/php-${version}.tar.xz https://mirrors.sohu.com/php/php-${version}.tar.xz
-		fi
-	fi
-	# ----------------------------------------------------------------------- #
-	
 	if [ ! -f $sourcePath/php/php-${version}.tar.xz ];then
 		wget --no-check-certificate -O $sourcePath/php/php-${version}.tar.xz https://museum.php.net/php7/php-${version}.tar.xz
-	fi
-
-	#检测文件是否损坏.
-	md5_file_ok=968adcb8d0c5652b6e191b025fc8ba41
-	if [ -f $sourcePath/php/php-${version}.tar.xz ];then
-		md5_file=`md5sum $sourcePath/php/php-${version}.tar.xz  | awk '{print $1}'`
-		if [ "${md5_file}" != "${md5_file_ok}" ]; then
-			echo "PHP${version} 下载文件不完整,重新安装"
-			rm -rf $sourcePath/php/php-${version}.tar.xz
-		fi
 	fi
 
 	cd $sourcePath/php && tar -Jxf $sourcePath/php/php-${version}.tar.xz

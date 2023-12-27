@@ -62,7 +62,7 @@ LOCAL_ADDR=common
 cn=$(curl -fsSL -m 10 -s http://ipinfo.io/json | grep "\"country\": \"CN\"")
 if [ ! -z "$cn" ] || [ "$?" == "0" ] ;then
 	LOCAL_ADDR=cn
-	HTTP_PREFIX="https://ghproxy.com/"
+	HTTP_PREFIX="https://mirror.ghproxy.com/"
 fi
 echo "local:${LOCAL_ADDR}"
 
@@ -71,21 +71,13 @@ if [ -f /bin/cp ];then
 		CP_CMD=/bin/cp
 fi
 
-if [ "$LOCAL_ADDR" != "common" ];then
-	curl --insecure -sSLo /tmp/master.zip https://code.midoks.icu/midoks/mdserver-web/archive/master.zip
-	cd /tmp && unzip /tmp/master.zip
 
-	$CP_CMD -rf /tmp/mdserver-web/* /www/server/mdserver-web
-	rm -rf /tmp/master.zip
-	rm -rf /tmp/mdserver-web
-else
-	curl --insecure -sSLo /tmp/master.zip https://codeload.github.com/midoks/mdserver-web/zip/master
+curl --insecure -sSLo /tmp/master.zip ${HTTP_PREFIX}github.com/netcccyun/mdserver-web/archive/refs/heads/master.zip
 
-	cd /tmp && unzip /tmp/master.zip
-	$CP_CMD -rf /tmp/mdserver-web-master/* /www/server/mdserver-web
-	rm -rf /tmp/master.zip
-	rm -rf /tmp/mdserver-web-master
-fi
+cd /tmp && unzip /tmp/master.zip
+$CP_CMD -rf /tmp/mdserver-web-master/* /www/server/mdserver-web
+rm -rf /tmp/master.zip
+rm -rf /tmp/mdserver-web-master
 
 
 #pip uninstall public

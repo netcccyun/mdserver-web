@@ -128,19 +128,19 @@ docker run -itd --name mw-server --privileged=true -p 7200:7200 -p 80:80 -p 443:
 - 初始安装
 
 ```
-curl --insecure -fsSL https://cdn.jsdelivr.net/gh/midoks/mdserver-web@latest/scripts/install.sh | bash
+curl --insecure -fsSL https://fastly.jsdelivr.net/gh/netcccyun/mdserver-web@latest/scripts/install.sh | bash
 ```
 
 - 直接更新
 
 ```
-curl --insecure -fsSL https://cdn.jsdelivr.net/gh/midoks/mdserver-web@latest/scripts/update.sh | bash
+curl --insecure -fsSL https://fastly.jsdelivr.net/gh/netcccyun/mdserver-web@latest/scripts/update.sh | bash
 ```
 
 - 卸载脚本
 
 ```
-wget --no-check-certificate -O uninstall.sh https://cdn.jsdelivr.net/gh/midoks/mdserver-web@latest/scripts/uninstall.sh && bash uninstall.sh
+wget --no-check-certificate -O uninstall.sh https://fastly.jsdelivr.net/gh/netcccyun/mdserver-web@latest/scripts/uninstall.sh && bash uninstall.sh
 ```
 
 ### 备用地址
@@ -148,20 +148,19 @@ wget --no-check-certificate -O uninstall.sh https://cdn.jsdelivr.net/gh/midoks/m
 - 初始安装
 
 ```
-curl --insecure -fsSL https://raw.githubusercontent.com/midoks/mdserver-web/master/scripts/install.sh | bash
-curl --insecure -fsSL https://code.midoks.icu/midoks/mdserver-web/raw/branch/master/scripts/install.sh | bash
+curl --insecure -fsSL https://raw.githubusercontent.com/netcccyun/mdserver-web/master/scripts/install.sh | bash
 ```
 
 - 直接更新
 
 ```
-curl --insecure -fsSL https://raw.githubusercontent.com/midoks/mdserver-web/master/scripts/update.sh | bash
+curl --insecure -fsSL https://raw.githubusercontent.com/netcccyun/mdserver-web/master/scripts/update.sh | bash
 ```
 
 - 卸载脚本
 
 ```
-wget --no-check-certificate -O uninstall.sh https://raw.githubusercontent.com/midoks/mdserver-web/master/scripts/uninstall.sh && bash uninstall.sh
+wget --no-check-certificate -O uninstall.sh https://raw.githubusercontent.com/netcccyun/mdserver-web/master/scripts/uninstall.sh && bash uninstall.sh
 ```
 
 

@@ -23,21 +23,6 @@ mkdir -p $serverPath/php
 cd ${rootPath}/plugins/php/lib && /bin/bash zlib.sh
 
 if [ ! -d $sourcePath/php/php${PHP_VER} ];then
-	
-	# ----------------------------------------------------------------------- #
-	# 中国优化安装
-	cn=$(curl -fsSL -m 10 -s http://ipinfo.io/json | grep "\"country\": \"CN\"")
-	LOCAL_ADDR=common
-	if [ ! -z "$cn" ] || [ "$?" == "0" ] ;then
-		LOCAL_ADDR=cn
-	fi
-
-	if [ "$LOCAL_ADDR" == "cn" ];then
-		if [ ! -f $sourcePath/php/php-${version}.tar.xz ];then
-			wget --no-check-certificate -O $sourcePath/php/php-${version}.tar.xz https://mirrors.sohu.com/php/php-${version}.tar.xz
-		fi
-	fi
-	# ----------------------------------------------------------------------- #
 
 	if [ ! -f $sourcePath/php/php-${version}.tar.gz ];then
 		wget --no-check-certificate -O $sourcePath/php/php-${version}.tar.gz https://museum.php.net/php5/php-${version}.tar.gz

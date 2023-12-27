@@ -48,7 +48,7 @@ load_vars() {
         GITHUB_RAW_URL="raw.githubusercontent.com/midoks/nezha/main"
         GITHUB_URL="github.com"
     else
-        GITHUB_RAW_URL="cdn.jsdelivr.net/gh/midoks/nezha@main"
+        GITHUB_RAW_URL="fastly.jsdelivr.net/gh/midoks/nezha@main"
         GITHUB_URL="dn-dao-github-mirror.daocloud.io"
     fi
 

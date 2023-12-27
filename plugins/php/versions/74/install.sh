@@ -15,7 +15,7 @@ function version_le() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" 
 function version_lt() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" != "$1"; }
 function version_ge() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" == "$1"; }
 
-version=7.4.26
+version=7.4.33
 PHP_VER=74
 Install_php()
 {
@@ -38,21 +38,6 @@ fi
 
 if [ ! -d $sourcePath/php/php${PHP_VER} ];then
 
-	# ----------------------------------------------------------------------- #
-	# 中国优化安装
-	cn=$(curl -fsSL -m 10 -s http://ipinfo.io/json | grep "\"country\": \"CN\"")
-	LOCAL_ADDR=common
-	if [ ! -z "$cn" ] || [ "$?" == "0" ] ;then
-		LOCAL_ADDR=cn
-	fi
-
-	if [ "$LOCAL_ADDR" == "cn" ];then
-		if [ ! -f $sourcePath/php/php-${version}.tar.xz ];then
-			wget --no-check-certificate -O $sourcePath/php/php-${version}.tar.xz https://mirrors.sohu.com/php/php-${version}.tar.xz
-		fi
-	fi
-	# ----------------------------------------------------------------------- #
-	
 	if [ ! -f $sourcePath/php/php-${version}.tar.xz ];then
 		wget --no-check-certificate -O $sourcePath/php/php-${version}.tar.xz https://museum.php.net/php7/php-${version}.tar.xz
 	fi

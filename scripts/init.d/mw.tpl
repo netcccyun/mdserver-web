@@ -223,9 +223,9 @@ mw_update()
     fi
     
     if [ "$LOCAL_ADDR" == "common" ];then
-        curl --insecure -fsSL https://raw.githubusercontent.com/midoks/mdserver-web/master/scripts/update.sh | bash
+        curl --insecure -fsSL https://raw.githubusercontent.com/netcccyun/mdserver-web/master/scripts/update.sh | bash
     else
-        curl --insecure -fsSL  https://code.midoks.icu/midoks/mdserver-web/raw/branch/dev/scripts/update.sh | bash
+        curl --insecure -fsSL https://fastly.jsdelivr.net/gh/netcccyun/mdserver-web@master/scripts/update.sh | bash
     fi
 }
 

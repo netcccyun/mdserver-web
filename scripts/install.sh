@@ -64,7 +64,7 @@ fi
 # ping  -c 1 github.com > /dev/null 2>&1
 # if [ "$?" != "0" ];then
 # 	LOCAL_ADDR=cn
-# 	HTTP_PREFIX="https://ghproxy.com/"
+# 	HTTP_PREFIX="https://mirror.ghproxy.com/"
 # fi
 
 HTTP_PREFIX="https://"
@@ -72,7 +72,7 @@ LOCAL_ADDR=common
 cn=$(curl -fsSL -m 10 -s http://ipinfo.io/json | grep "\"country\": \"CN\"")
 if [ ! -z "$cn" ] || [ "$?" == "0" ] ;then
 	LOCAL_ADDR=cn
-    HTTP_PREFIX="https://ghproxy.com/"
+    HTTP_PREFIX="https://mirror.ghproxy.com/"
 fi
 
 echo "local:${LOCAL_ADDR}"
@@ -93,21 +93,11 @@ if [ $OSNAME != "macos" ];then
 
 	# https://cdn.jsdelivr.net/gh/midoks/mdserver-web@latest/scripts/install.sh
 	if [ ! -d /www/server/mdserver-web ];then
-		if [ "$LOCAL_ADDR" == "common" ];then
-			curl --insecure -sSLo /tmp/master.zip ${HTTP_PREFIX}github.com/midoks/mdserver-web/archive/refs/heads/master.zip
-			cd /tmp && unzip /tmp/master.zip
-			mv -f /tmp/mdserver-web-master /www/server/mdserver-web
-			rm -rf /tmp/master.zip
-			rm -rf /tmp/mdserver-web-master
-		else
-			curl --insecure -sSLo /tmp/master.zip https://code.midoks.icu/midoks/mdserver-web/archive/master.zip
-			cd /tmp && unzip /tmp/master.zip
-			mv -f /tmp/mdserver-web /www/server/mdserver-web
-			rm -rf /tmp/master.zip
-			rm -rf /tmp/mdserver-web
-		fi
-
-		
+		curl --insecure -sSLo /tmp/master.zip ${HTTP_PREFIX}github.com/netcccyun/mdserver-web/archive/refs/heads/master.zip
+		cd /tmp && unzip /tmp/master.zip
+		mv -f /tmp/mdserver-web-master /www/server/mdserver-web
+		rm -rf /tmp/master.zip
+		rm -rf /tmp/mdserver-web-master
 	fi
 
 	# install acme.sh
@@ -127,7 +117,7 @@ fi
 
 echo "use system version: ${OSNAME}"
 if [ "${OSNAME}" == "macos" ];then
-	curl --insecure -fsSL https://code.midoks.icu/midoks/mdserver-web/raw/branch/master/scripts/install/macos.sh | bash
+	curl --insecure -fsSL ${HTTP_PREFIX}github.com/netcccyun/mdserver-web/raw/branch/master/scripts/install/macos.sh | bash
 else
 	cd /www/server/mdserver-web && bash scripts/install/${OSNAME}.sh
 fi
